@@ -6,27 +6,24 @@
 
 <script>
 import {ArcballControls} from '@/utils/ArcballControls';
+import {SphereGeometry} from '@/utils/SphereGeometry2';
 import * as THREE from 'three';
 
 export default {
   name: 'Home',
 
-  async mounted() {
+  mounted() {
     this.initScene();
-    console.time('testFun');
-    await this.testFun();
-    console.timeEnd('testFun');
+    this.testSphereGeometry();
   },
 
   methods: {
     initScene() {
-      const scene = new THREE.Scene();
-      window.THREE = THREE;
-      window.screen = scene;
+      this.scene = new THREE.Scene();
       // const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
       const frustumSize = 10;//10; //设置显示相机前方1000高的内容
       const aspect = window.innerWidth / innerHeight; //计算场景的宽高比
-      const camera = new THREE.OrthographicCamera(
+      this.camera = new THREE.OrthographicCamera(
           frustumSize * aspect / - 2,
           frustumSize * aspect / 2,
           frustumSize / 2,
@@ -37,12 +34,11 @@ export default {
           // 1e-6,  //数值大，效果不对，透视了
           // 1e27
       );
-      window.camera = camera;
       const renderer = new THREE.WebGLRenderer();
       const group = new THREE.Group();
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.querySelector('#div3d').appendChild(renderer.domElement);
-      scene.add(group);
+      this.scene.add(group);
 
       // ambidentLight
       const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -75,29 +71,51 @@ export default {
       const zAxisColor = new THREE.Color('#0000ff');
       axesHelper.setColors(xAxisColor, yAxisColor, zAxisColor);
       //  axesHelper.add(controls2._gizmos);
-      scene.add(axesHelper);
+      this.scene.add(axesHelper);
   
       
       
-      const controls2 = new ArcballControls(camera, renderer.domElement, scene);
+      const controls2 = new ArcballControls(this.camera, renderer.domElement, this.scene);
       controls2.enableZoom = true;
       controls2.cursorZoom = true;
       window.controls2 = controls2;
 
-      camera.position.set(0, 8, 20);
-      
+      this.camera.position.set(0, 8, 20);
+      const that = this;
       function animate() {
           
           controls2.update();
           requestAnimationFrame(animate);
           
-          renderer.render(scene, camera);
+          renderer.render(that.scene, that.camera);
 
       }
       animate();
     },
-    async testFun() {
+    testSphereGeometry() {
+      const material = new THREE.MeshBasicMaterial({color: 0xf23423, wireframe: true, side: THREE.DoubleSide});
+  
+      const radius = 1;
+      const widthSegments = 5;
+      const heightSegments = 5;
+      const phiStart = 0;
+      const phiEnd = Math.PI;
+      const thetaStart = 0;
+      const thetaEnd = Math.PI;
 
+      const geometry = new SphereGeometry(
+                            radius,
+                            widthSegments,
+                            heightSegments,
+                            phiStart,
+                            phiEnd,
+                            thetaStart,
+                            thetaEnd,
+                          );
+      
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.position.set(2,2,2);
+      this.scene.add(mesh);
     }
   }
 }
