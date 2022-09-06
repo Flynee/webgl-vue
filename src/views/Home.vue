@@ -7,12 +7,14 @@
 <script>
 import {ArcballControls} from '@/utils/ArcballControls';
 import * as THREE from 'three';
+import {animation} from '@/utils/animation';
 
 export default {
   name: 'Home',
 
   mounted() {
     this.initScene();
+    animation.start2(this.scene);
   },
 
   methods: {
@@ -67,8 +69,16 @@ export default {
 
       this.camera.position.set(0, 8, 20);
       const that = this;
+      window.rendererCBS = [];
+
       function animate() {
-         
+           window.rendererCBS.forEach(cb => {
+              const fn = cb[0];
+             if (fn instanceof Function) {
+                const args = cb.slice(1);
+                fn(...args);
+             }
+           });
           that.control.update();
           requestAnimationFrame(animate);
           
