@@ -1,6 +1,9 @@
 <template>
   <div class="home">
     <div id="div3d"></div>
+    <canvas id="color-map">
+
+    </canvas>
   </div>
 </template>
 
@@ -8,13 +11,15 @@
 import {ArcballControls} from '@/utils/ArcballControls';
 import * as THREE from 'three';
 import {animation} from '@/utils/animation';
+import colormaptest from '@/utils/colormaptest';
 
 export default {
   name: 'Home',
 
   mounted() {
     this.initScene();
-    animation.start2(this.scene);
+    // animation.start2(this.scene);
+    colormaptest();
   },
 
   methods: {
@@ -101,9 +106,20 @@ export default {
 .home {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 #div3d {
   width: 100%;
   height: 100%;
+}
+
+#color-map {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: 30px;
+  height: 400px;
+  background: #fff;
+
 }
 </style>
