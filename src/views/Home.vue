@@ -12,6 +12,8 @@ import {ArcballControls} from '@/utils/ArcballControls';
 import * as THREE from 'three';
 import {animation} from '@/utils/animation';
 import colormaptest from '@/utils/colormaptest';
+import {vertexrender} from '@/utils/vertexrender';
+import {groupstest} from '@/utils/groups';
 
 export default {
   name: 'Home',
@@ -19,13 +21,14 @@ export default {
   mounted() {
     this.initScene();
     // animation.start2(this.scene);
-    colormaptest();
+    // colormaptest();
+    groupstest.start(this.scene);
   },
 
   methods: {
     initScene() {
       this.scene = new THREE.Scene();
-      const frustumSize = 10;//10; //设置显示相机前方1000高的内容
+      const frustumSize = 1000;//10; //设置显示相机前方1000高的内容
       const aspect = window.innerWidth / window.innerHeight; //计算场景的宽高比
       this.camera = new THREE.OrthographicCamera(
           frustumSize * aspect / - 2,
@@ -33,7 +36,7 @@ export default {
           frustumSize / 2,
           frustumSize / - 2,
           0,
-          1000,
+          1000000,
         
       );
       this.renderer = new THREE.WebGLRenderer();
@@ -47,7 +50,7 @@ export default {
       group.add(ambientLight);
 
       // directionalLight
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.1);
       directionalLight.position.set(20, 20, 20);
       directionalLight.target.position.set(0, 0, 0);
       group.add(directionalLight);

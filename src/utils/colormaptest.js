@@ -9,7 +9,6 @@ export default function colormaptest() {
         format: 'hex',
         alpha: 1
     });
-    console.debug(colors);
     const canvas = document.querySelector("#color-map");
     const w = canvas.width;
     const h = canvas.height;
@@ -24,5 +23,4 @@ export default function colormaptest() {
     }
     
     
-    console.debug(colors); 
 }
