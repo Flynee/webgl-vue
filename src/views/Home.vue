@@ -28,7 +28,7 @@ export default {
   methods: {
     initScene() {
       this.scene = new THREE.Scene();
-      const frustumSize = 1000;//10; //设置显示相机前方1000高的内容
+      const frustumSize = 10;//10; //设置显示相机前方1000高的内容
       const aspect = window.innerWidth / window.innerHeight; //计算场景的宽高比
       this.camera = new THREE.OrthographicCamera(
           frustumSize * aspect / - 2,
@@ -36,7 +36,7 @@ export default {
           frustumSize / 2,
           frustumSize / - 2,
           0,
-          1000000,
+          1000,
         
       );
       this.renderer = new THREE.WebGLRenderer();
