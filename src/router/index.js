@@ -1,21 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import RayCaster from '../views/RayCaster.vue'
+import Index from '../views/Index.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Index',
+    component: Index
   },
   {
-    path: '/RayCaster',
-    name: 'RayCaster',
-    component: RayCaster
+    path: '/BVH_Raycast',
+    name: 'Index',
+    component: ()=> import('../views/BVH_Raycast')
   },
+
 ]
 
 const router = new VueRouter({
