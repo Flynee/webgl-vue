@@ -1,5 +1,6 @@
 <template>
     <div class="index-list">
+        <router-link to="/Home">Home</router-link><br>
         <router-link to="/BVH_Raycast">BVH 加速射线拾取</router-link>
     </div>
 </template>

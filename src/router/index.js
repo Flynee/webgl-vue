@@ -15,6 +15,11 @@ const routes = [
     name: 'Index',
     component: ()=> import('../views/BVH_Raycast')
   },
+  {
+    path: '/Home',
+    name: 'Home',
+    component: ()=> import('../views/Home')
+  },
 
 ]
 
