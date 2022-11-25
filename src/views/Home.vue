@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div id="div3d"></div>
+      <canvas id="div3d" style="width:100%; height:100%;"></canvas>
   </div>
 </template>
 
@@ -43,6 +43,9 @@ export default {
         document.addEventListener('wheel', (event)=>{
             window.$bus.emit(EventConfig.WHEEL, event);
         });
+        window.addEventListener('resize', (event)=>{
+            window.$bus.emit(EventConfig.RESIZE, event);
+        });
     },
 
   }
@@ -50,13 +53,15 @@ export default {
 </script>
 <style scoped>
 .home {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
 }
 #div3d {
+  position:absolute;
   width: 100%;
   height: 100%;
 }
+
 
 </style>

@@ -2,7 +2,9 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import EventConfig from '@/utils/core/EventConfig';
-import Log from '@/utils/Log';
+import TickLogicEventType from '@/utils/core/TickLogicEventType';
+
+import Log from '@/utils/log/Log';
 
 const log = Log.getInstance();
 
@@ -28,7 +30,7 @@ export default function loadBox() {
         
         });
         cad.scene.add(root);
-        window.$bus.emit(EventConfig.TICK_RENDER);
+        window.$bus.emit(EventConfig.TICK_LOGIC, TickLogicEventType.KEEP_OBJ_IN_FRUSTUM_CENTER);
         log.info('load a box!');
     });
 }

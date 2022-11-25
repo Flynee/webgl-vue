@@ -8,7 +8,8 @@ const EventConfig = {
     POINTER_UP: 'pointerup',
     CLICK: 'click',
     DB_CLICK: 'dbclick',
-    WHEEL: 'wheel'
+    WHEEL: 'wheel',
+    RESIZE: 'resize'
 }
 
 Object.freeze(EventConfig);

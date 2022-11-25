@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import EventConfig from '@/utils/core/EventConfig';
 
 export default function keepOBJInFrustumCenter() {
     const cad = window.cad;
@@ -17,6 +18,8 @@ export default function keepOBJInFrustumCenter() {
         if (pt_len < sphereSize || pt_len > sphereSize) {
             cad.camera.position.add(d.multiplyScalar((sphereSize - pt_len)));
         }
+
+        window.$bus.emit(EventConfig.TICK_RENDER);
 
     }
 }
